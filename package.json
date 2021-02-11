@@ -4,6 +4,8 @@
   "description": "This microservice read data from rabbitmq and insert humidity data extract from iot sensors to influxdb",
   "main": "index.js",
   "scripts": {
+    "start": "tsc && node ./dist/app.js",
+    "debug": "export DEBUG=* && npm run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
