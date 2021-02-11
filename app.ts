@@ -6,7 +6,7 @@ import debug from 'debug';
 
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);
-const port: Number = 3000;
+const port: Number = 8080;
 const debugLog: debug.IDebugger = debug('app');
 
 app.use(bodyparser.json());
