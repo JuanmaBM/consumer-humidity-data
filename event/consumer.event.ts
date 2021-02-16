@@ -1,20 +1,19 @@
-import * as Amqp from 'amqp-ts';
-import debug from 'debug';
+import { Message } from 'amqp-ts';
+import AmqpClient from './AmqpClient';
 
-export class consumer {
+export class Consumer {
 
-    private debugLog: debug.IDebugger = debug('consumer');
-    private connection: Amqp.Connection;
-    private DEFAULT_CONSUMER_FUNCTION = (message: Amqp.Message) =>
+    private queue: string;
+    private DEFAULT_CONSUMER_FUNCTION = (message: Message) =>
         console.log("Message received: " + message.getContent());
     
 
-    constructor(connection: Amqp.Connection) {
-        this.connection = connection;
+    constructor(queue: string) {
+        this.queue = queue;
     }
 
-    public consume(queue: string, consumerFunction?: (msg: Amqp.Message) => any) {
-        this.connection.declareQueue(queue)
+    public start(consumerFunction?: (msg: Message) => any) {
+        AmqpClient.getConnection()?.declareQueue(this.queue)
             .activateConsumer(consumerFunction ? consumerFunction : this.DEFAULT_CONSUMER_FUNCTION);
     }
 

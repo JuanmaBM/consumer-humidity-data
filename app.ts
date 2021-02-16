@@ -1,18 +1,18 @@
-import express from 'express';
 import * as http from 'http';
 import * as bodyparser from 'body-parser';
-import * as Consumer from './event/consumer.event';
-import * as Amqp from 'amqp-ts';
+import * as dotenv from 'dotenv';
 
-import { AmqpClientFactory } from './event/AmqpClient';
+import express from 'express';
+import { Consumer } from './event/consumer.event';
+
+dotenv.config();
 
 const app: express.Application = express();
 const server: http.Server = http.createServer(app);
 const port: number = 8080;
 
-var connection = AmqpClientFactory.build("192.168.100.86:5672", "consumer", "consumerpass");
-var consumer: Consumer.consumer = new Consumer.consumer(connection);
-consumer.consume('humidity', (message: Amqp.Message)  => console.info(message));
+var consumer: Consumer = new Consumer('humidity');
+consumer.start(message  => console.info(message));
 
 app.use(bodyparser.json())
 app.route('/health')
