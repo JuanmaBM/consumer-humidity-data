@@ -3,7 +3,7 @@ import * as bodyparser from 'body-parser';
 import * as dotenv from 'dotenv';
 
 import express from 'express';
-import { Consumer } from './event/consumer.event';
+import { Consumer } from './common/event/consumer.event';
 
 dotenv.config();
 

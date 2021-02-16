@@ -1,5 +1,5 @@
 import { Message } from 'amqp-ts';
-import AmqpClient from './AmqpClient';
+import AmqpClient from './amqpclient.event';
 
 export class Consumer {
 
