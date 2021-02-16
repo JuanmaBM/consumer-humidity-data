@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/JuanmaBM/consumer-humidity-data#readme",
   "dependencies": {
+    "amqp-ts": "^1.8.0",
+    "amqplib": "^0.6.0",
     "cors": "^2.8.5",
     "debug": "^4.3.1",
     "express": "^4.17.1",
@@ -26,6 +28,7 @@
     "winston": "^3.3.3"
   },
   "devDependencies": {
+    "@types/amqplib": "^0.5.17",
     "@types/cors": "^2.8.9",
     "@types/debug": "^4.1.5",
     "@types/express": "^4.17.11",
