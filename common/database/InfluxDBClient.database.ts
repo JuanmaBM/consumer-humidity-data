@@ -1,4 +1,10 @@
 import * as Influx from 'influx';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const HOST: string = process.env.INFLUXDB_HOST ? process.env.INFLUXDB_HOST : 'localhost';
+const DATABASE: string = process.env.INFLUXDB_DATABASE ? process.env.INFLUXDB_DATABASE : 'default';
 
 class InfluxDBClient {
 
@@ -6,7 +12,7 @@ class InfluxDBClient {
     private influx: Influx.InfluxDB;
 
     constructor() {
-        this.influx = this.connect("", "");
+        this.influx = this.connect(HOST, DATABASE);
     }
 
     public static getInstance() {

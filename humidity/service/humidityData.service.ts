@@ -12,8 +12,10 @@ class HumidityDataService {
         return this.instance;
     }
 
-    insertData = (humidityData: HumidityDto) => HumidityInfluxDao.insert(humidityData);
-    
+    insertData = (humidityData: HumidityDto) => {
+        if (humidityData) HumidityInfluxDao.insert(humidityData);
+        else console.error("Data received is wrong");
+    }
 }
 
 export default HumidityDataService.getInstance();
