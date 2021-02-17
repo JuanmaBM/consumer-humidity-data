@@ -11,10 +11,10 @@ const PASSWORD: string | undefined = process.env.RABBITMQ_USER_PASSWORD;
 class AmqpClient {
 
     private static instance: AmqpClient;
-    private connection: Connection | undefined;
+    private connection: Connection;
 
     constructor() {
-        this.build(HOST, USERNAME, PASSWORD)
+        this.connection = this.build(HOST, USERNAME, PASSWORD)
     }
 
     public static getInstance() {
@@ -37,7 +37,7 @@ class AmqpClient {
         }
 
         connectionString = connectionString.concat(host);
-        this.connection = new Connection(connectionString)
+        return new Connection(connectionString)
             .on('error_connection', err => debug.log(err))
             .on('trying_connect', () => debug.log("Trying connect ..."))
             .on('open_connection', () => debug.log(`Opening AMQP connection to ${host}`));

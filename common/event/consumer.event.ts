@@ -13,7 +13,7 @@ export class Consumer {
     }
 
     public start(consumerFunction?: (msg: Message) => any) {
-        AmqpClient.getConnection()?.declareQueue(this.queue)
+        AmqpClient.getConnection().declareQueue(this.queue)
             .activateConsumer(consumerFunction ? consumerFunction : this.DEFAULT_CONSUMER_FUNCTION);
     }
 
