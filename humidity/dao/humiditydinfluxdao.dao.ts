@@ -14,13 +14,16 @@ class HumidityInfluxDao {
     }
 
     public insert(humidityData: HumidityDto) {
-        InfluxDBClient.getConnection().writePoints([
+        var influx = InfluxDBClient.getConnection()
+        influx.writePoints([
             {
               measurement: 'humidity_data',
-              tags: { host: 'iot' },
-              fields: humidityData,
+              fields: humidityData
             }
-          ]);
+          ]).catch(reason => {
+            console.error("An error happened when send write point to influxdb:");
+            console.error(reason);
+          });
     }
 
 }
